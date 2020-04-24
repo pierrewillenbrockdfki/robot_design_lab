@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<launch>
+
+    <!-- launch a simulated world in Gazebo -->
+
+    <!-- Arguments -->
+    <arg name="gazebo_gui" default="true"/>
+    <arg name="world_name" default="simple_competition"/>
+
+    <!-- bringup Gazebo world -->
+    <include file="$(find rdl_sim_worlds)/launch/rdl_sim_worlds_example.launch">
+        <arg name="gazebo_gui" value="$(arg gazebo_gui)"/>
+        <arg name="world_name" value="$(arg world_name)"/>
+    </include>
+
+</launch>

@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<launch>
+
+    <!-- bringup a turtlebot3 burger with camera in simulation with gazebo -->
+
+    <!-- Arguments -->
+    <arg name="model" default="simplified_burger" /> <!-- options: burger, simplified_burger (use latest to save resources)-->
+    <arg name="x_pos" default="0.0"/>
+    <arg name="y_pos" default="0.0"/>
+    <arg name="gazebo_gui" default="true"/>
+    <arg name="world_name" default="turtlebot3_world"/> <!-- options: turtlebot3_world, empty, simple_competition -->
+
+    <!-- launch a simulated world in Gazebo -->
+    <include file="$(find rdl_sim_worlds)/launch/rdl_sim_worlds_example.launch">
+        <arg name="gazebo_gui" value="$(arg gazebo_gui)"/>
+        <arg name="world_name" value="$(arg world_name)"/>
+    </include>
+
+    <!-- upload turtlebot3 URDF model to param server -->
+    <param name="robot_description"
+           command="$(find xacro)/xacro $(find rdl_turtlebot3_description)/urdf/turtlebot3_$(arg model).urdf.xacro" />
+
+    <!-- spawn turtlebot3 robot -->
+    <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf"
+          args="-urdf -model turtlebot3_burger -x $(arg x_pos) -y $(arg y_pos) -z 0.0 -param robot_description" />
+
+    <!-- robot state publisher, publishes tf data based on joint states topic -->
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
+        <param name="publish_frequency" type="double" value="50.0" />
+    </node>
+
+</launch>

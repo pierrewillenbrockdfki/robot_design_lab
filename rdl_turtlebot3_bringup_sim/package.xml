@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package>
+    <name>rdl_turtlebot3_bringup_sim</name>
+    <version>0.0.1</version>
+    <description>
+        turtlebot3 lightweight simulation
+
+        Robot Design Lab - University of Bremen lecture - lab material.
+    </description>
+
+    <maintainer email="oscar.lima@dfki.de">Oscar Lima</maintainer>
+
+    <license>GPLv3</license>
+
+    <author email="oscar.lima@dfki.de">Oscar Lima</author>
+
+    <buildtool_depend>catkin</buildtool_depend>
+
+    <run_depend>turtlebot3_gazebo</run_depend>
+    <run_depend>gazebo_ros</run_depend>
+
+</package>

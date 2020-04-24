@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package>
+  <name>rdl_turtlebot3_description</name>
+  <version>0.0.1</version>
+  <description>
+      A custom turtlebot3 robot burger config with camera.
+      We also provide a simplified primitive shaped turtlebot3 to ease the computational
+      rendering burden of gazebo and rviz.
+
+      Robot Design Lab - University of Bremen lecture - lab material.
+  </description>
+
+  <maintainer email="oscar.lima@dfki.de">Oscar Lima</maintainer>
+
+  <license>GPLv3</license>
+  
+  <author email="oscar.lima@dfki.de">Oscar Lima</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+    
+  <run_depend>urdf</run_depend>
+  <run_depend>xacro</run_depend>
+
+</package>

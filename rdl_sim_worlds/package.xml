@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<package>
+    <name>rdl_sim_worlds</name>
+    <version>0.0.1</version>
+    <description>
+        Gazebo worlds for turtlebot3.
+
+        Robot Design Lab - University of Bremen lecture - lab material.
+    </description>
+
+    <maintainer email="oscar.lima@dfki.de">Oscar Lima</maintainer>
+
+    <license>GPLv3</license>
+
+    <author email="oscar.lima@dfki.de">Oscar Lima</author>
+
+    <buildtool_depend>catkin</buildtool_depend>
+
+    <run_depend>gazebo_ros</run_depend>
+    <run_depend>turtlebot3_gazebo</run_depend>
+
+    <export>
+        <gazebo_ros gazebo_model_path="${prefix}/models"/>
+        <gazebo_ros gazebo_media_path="${prefix}"/>
+    </export>
+
+</package>
