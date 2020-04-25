@@ -74,8 +74,8 @@
             <!-- modified (updateRate) to reduce computation effort, default : 360 -->
             <samples>360</samples>
             <resolution>1</resolution>
-            <min_angle>0.0</min_angle>
-            <max_angle>6.28319</max_angle>
+            <min_angle>-2.35619</min_angle> <!-- -135 to 135 degree -->
+            <max_angle>2.35619</max_angle>
           </horizontal>
         </scan>
         <range>
