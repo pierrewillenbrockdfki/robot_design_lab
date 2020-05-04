@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+
+<!-- Allow turtlebot3 individual joint control for left and right wheel -->
+
+<robot name="joint_ctrl_burger" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <!-- tag required by ros control for individual joint control -->
+  <transmission name="wheel_left_tran">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="wheel_left_joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="wheel_left">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <!-- tag required by ros control for individual joint control -->
+  <transmission name="wheel_right_tran">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="wheel_right_joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="wheel_right">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <!-- ROS Control plugin for Gazebo -->
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <robotNamespace>/turtlebot3_burger</robotNamespace>
+    </plugin>
+  </gazebo>
+
+</robot>

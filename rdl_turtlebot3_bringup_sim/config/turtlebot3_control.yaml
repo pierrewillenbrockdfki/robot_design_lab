@@ -1,0 +1,16 @@
+# the joint_state_controller communicates with hardware interface
+# to publish joint states: position, velocity and effort
+joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 10
+
+# wheel velocity controller params
+wheel_left_joint_controller:
+  type: effort_controllers/JointVelocityController
+  joint: wheel_left_joint # 0.004 < p < 0.0042
+  pid: {p: &p_gain 0.0041, i: &i_gain 0.0, d: &d_gain 0.0, i_clamp: &i_clamp 0.0}
+
+wheel_right_joint_controller:
+  type: effort_controllers/JointVelocityController
+  joint: wheel_right_joint
+  pid: {p: *p_gain, i: *i_gain, d: *d_gain, i_clamp: *i_clamp}

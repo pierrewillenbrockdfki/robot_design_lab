@@ -1,15 +1,15 @@
 <?xml version="1.0" ?>
 
-<!-- A simplified turtlebot3 model (made of primitive shapes) to ease computational burden
-     along with laser scanner, RGB camera and high level /cmd vel robot body control -->
+<!-- Expose turtlebot3 individual wheel/joint control (left and right wheel are the joints) 
+     reuse the model from: simplified_burger, add transmission tags and gazebo ros control -->
 
-<robot name="turtlebot3_burger" xmlns:xacro="http://ros.org/wiki/xacro">
+<robot name="joint_ctrl_burger" xmlns:xacro="http://ros.org/wiki/xacro">
   <!-- robot 3D geometry and collision description -->
   <xacro:include filename="$(find rdl_turtlebot3_description)/urdf/includes/turtlebot3_simplified_burger_model.xacro"/>
   <!-- common color definitions -->
   <xacro:include filename="$(find rdl_turtlebot3_description)/urdf/includes/common_properties.xacro"/>
   <!-- phisics properties (friction, etc), laser scanner + camera -->
   <xacro:include filename="$(find rdl_turtlebot3_description)/urdf/includes/turtlebot3_common_burger.gazebo.xacro"/>
-  <!-- diff drive plugin (/cmd_vel handling, odometry and tf -->
-  <xacro:include filename="$(find rdl_turtlebot3_description)/urdf/includes/differential_drive_plugin.gazebo.xacro"/>
+  <!-- allow turtlebot3 individual joint control for left and right wheel -->
+  <xacro:include filename="$(find rdl_turtlebot3_description)/urdf/includes/turtlebot3_joint_ctrl_burger.gazebo.xacro"/>
 </robot>

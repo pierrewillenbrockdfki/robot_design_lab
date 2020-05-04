@@ -1,11 +1,6 @@
+<?xml version="1.0"?>
 <sdf version="1.4">
   <world name="default">
-
-    <scene>
-      <ambient>0.4 0.4 0.4 1</ambient>
-      <background>0.7 0.7 0.7 1</background>
-      <shadows>true</shadows>
-    </scene>
 
     <!-- A global light source -->
     <include>
@@ -17,9 +12,14 @@
       <uri>model://ground_plane</uri>
     </include>
 
+    <gravity>0 0 -9.8</gravity>
+
     <physics type="ode">
-      <real_time_update_rate>1000.0</real_time_update_rate>
-      <max_step_size>0.001</max_step_size>
+      <!-- see: https://answers.gazebosim.org//question/2477/what-does-update-rate-control/ -->
+      <!-- modified (real_time_update_rate) to reduce computation effort, default : 1000.0 -->
+      <real_time_update_rate>100.0</real_time_update_rate>
+      <!-- modified (max_step_size) to reduce computation effort, default : 0.001 -->
+      <max_step_size>0.01</max_step_size>
       <real_time_factor>1</real_time_factor>
       <ode>
         <solver>
@@ -37,6 +37,22 @@
         </constraints>
       </ode>
     </physics>
+
+    <scene>
+      <ambient>0.4 0.4 0.4 1</ambient>
+      <background>0.7 0.7 0.7 1</background>
+      <!-- modified (shadows) to reduce computation effort, default : true -->
+      <shadows>false</shadows>
+    </scene>
+
+    <gui fullscreen='0'>
+      <camera name='user_camera'>
+        <!-- turtlebot3 close up -->
+        <pose>0.531807 -0.488679 0.327450 -0.000001 0.275643 2.356194</pose>
+        <view_controller>orbit</view_controller>
+      </camera>
+    </gui>
+
   </world>
 
 </sdf>

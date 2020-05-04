@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!-- Control all turtlebot3 joints: right wheel and left wheel using ROS control.
+       NOTE: position, velocity and effort control becomes available -->
+
+  <!-- load base, neck, head cam and joint state parameters to param server -->
+  <rosparam file="$(find rdl_turtlebot3_bringup_sim)/config/turtlebot3_control.yaml" command="load" ns="turtlebot3_burger" />
+
+  <!-- spawn base, neck, head cam and joint state controllers -->
+  <node pkg="controller_manager" type="spawner" name="basic_ctrl_spawner" ns="turtlebot3_burger"
+        output="screen" args="wheel_left_joint_controller
+                              wheel_right_joint_controller
+                              joint_state_controller" />
+
+</launch>
