@@ -3,7 +3,7 @@
 <robot name="diff_drive" xmlns:xacro="http://ros.org/wiki/xacro">
 
   <!-- diff drive plugin (/cmd_vel handling, odometry and tf -->
-    <gazebo>
+  <gazebo>
     <plugin name="turtlebot3_burger_controller" filename="libgazebo_ros_diff_drive.so">
       <commandTopic>cmd_vel</commandTopic>
       <odometryTopic>odom</odometryTopic>
