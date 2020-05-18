@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<launch>
+
+    <!-- Run all necessary components to test ws3 local planner task -->
+
+    <arg name="gazebo_gui" default="true" />
+    <arg name="x_pos" default="0.0" />
+    <arg name="y_pos" default="-0.5" />
+
+    <!-- bringup a localised robot in simulation -->
+    <include file="$(find rdl_turtlebot3_bringup_sim)/launch/robot.launch">
+        <arg name="gazebo_gui" value="$(arg gazebo_gui)" />
+        <arg name="x_pos" value="$(arg x_pos)" />
+        <arg name="y_pos" value="$(arg y_pos)" />
+    </include>
+
+    <!-- run move base but disable its connection with rviz (remap /move_base_simple/goal to dumy topic) -->
+    <include file="$(find rdl_turtlebot3_navigation)/launch/move_base.launch">
+        <arg name="simple_goal_topic" value="dumy" />
+    </include>
+
+    <!-- subscribe to /move_base_simple/goal (rviz way of giving goals) and call srv to make plan -->
+    <node pkg="rdl_turtlebot3_navigation" type="goal_handler.py" name="goal_handler" output="screen"/>
+
+</launch>
