@@ -1,0 +1,27 @@
+# Student cannot copy paste commands from pdf so we made this file for them ; )
+
+############# DWA LOCAL PLANNER
+
+# [DWA1] while its true that in every launch file comes with a roscore, this allows you to keep rviz open at all time
+roscore
+
+# bringup robot, ros navigation stack (we use the costmap from them), and goal handler
+# ---
+# [DWA2] use this command if you want to save computational effort in your machine
+roslaunch rdl_turtlebot3_navigation local_planner.launch gazebo_gui:=false
+# [DWA3] use this command if your computer is awesome and you don't have problems wit graphics
+roslaunch rdl_turtlebot3_navigation local_planner.launch gazebo_gui:=true
+
+# [DWA4] open rviz, debugging topic visualisation tool
+rosrun rviz rviz --display-config `rospack find rdl_turtlebot3_navigation`/config/rdl_move_base.rviz
+
+# [DWA5] test your local planner implementation
+roslaunch rdl_turtlebot3_navigation dwa_local_planner.launch
+
+# wait but robot is not moving!!?
+yeah.. publish a goal in rviz (watch: https://youtu.be/GuYpWV9S65Y)
+
+############# GLOBAL PLANNER
+
+# [GP1]
+
