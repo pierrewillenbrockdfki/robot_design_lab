@@ -38,8 +38,28 @@ class GlobalPlanner(object):
         '''
         receive all necessary elements (grid map + properties, etc), find a path from start to goal
         '''
-        # ============= YOUR CODE GOES HERE! =====
+        # ============= Some stuff that might help you! =====
+        # the center is actually not at the exact middle of the grid but a bit above:
+        origin = [-3.3, -2.7, 0.0]
+        center = [-origin[0] / map_resolution, -origin[1] / map_resolution]
 
+        # helper functions
+        def node_to_pos(node):
+            '''get x, y position on the map from node index in a 2d-grid.'''
+            return [
+                -(node[0] - center[0]) * map_resolution,
+                (node[1] - center[1]) * map_resolution
+            ]
+
+        def pos_to_node(pos):
+            '''get node index in a 2d-grid according to position on the map (in meter)'''
+            return [
+                int(center[0] - int(pos[0] / map_resolution)),
+                int(center[1] + int(pos[1] / map_resolution))
+            ]
+
+        # ============= YOUR CODE GOES HERE! =====
+        
         # hint: replace the following line below with your implementation
         plan_as_array_of_poses = self.gen_dummy_plan()
 
