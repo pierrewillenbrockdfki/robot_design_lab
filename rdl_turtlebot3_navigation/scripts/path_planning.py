@@ -22,14 +22,17 @@ class GlobalPlanner(object):
         self.costmap_received = False
 
     def gen_dummy_plan(self):
-        plan_as_array_of_poses = []
-        step1 = [2.0, 0.0]
-        plan_as_array_of_poses.append(step1)
-        step2 = [2.0, 1.0]
-        plan_as_array_of_poses.append(step2)
-        step3 = [1.0, 1.0]
-        plan_as_array_of_poses.append(step3)
-        return plan_as_array_of_poses
+        '''
+        this is a hand made plan, use a pathfinder istead!
+        '''
+        waypoints = [
+            [0.0, 0.0],
+            [0.6, 0.0],
+            [0.6, 1.0],
+            [1.7, 1.0],
+            [1.7, 1.7]
+        ]
+        return waypoints
 
     def findPlan(self, costmap_as_array, map_resolution, width, height, start, goal):
         '''
@@ -37,8 +40,11 @@ class GlobalPlanner(object):
         '''
         # ============= YOUR CODE GOES HERE! =====
 
-        # replace the following line here with your implementation
+        # hint: replace the following line below with your implementation
         plan_as_array_of_poses = self.gen_dummy_plan()
+
+        # hint: see : http://wiki.ros.org/global_planner
+        # hint: assist yourself with information from the pdf worksheet
 
         # ============= YOUR CODE ENDS HERE! =====
         
