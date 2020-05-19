@@ -1,5 +1,19 @@
 # Student cannot copy paste commands from pdf so we made this file for them ; )
 
+############# GLOBAL PLANNER
+
+# [GP1]
+roscore
+
+# [GP2] bring up robot (using gazebo backend only, no ui needed)
+roslaunch rdl_turtlebot3_bringup_sim robot.launch gazebo_gui:=false x_pos:=0.0 y_pos:=-0.5 yaw:=1.57
+
+# [GP3] run move base (ros navigation stack) for tb3 so costmaps become available
+roslaunch rdl_turtlebot3_navigation move_base.launch
+
+# [GP4] run path planning node
+rosrun rdl_turtlebot3_navigation path_planning.py
+
 ############# DWA LOCAL PLANNER
 
 # [DWA1] while its true that in every launch file comes with a roscore, this allows you to keep rviz open at all time
@@ -20,8 +34,3 @@ roslaunch rdl_turtlebot3_navigation dwa_local_planner.launch
 
 # wait but robot is not moving!!?
 yeah.. publish a goal in rviz (watch: https://youtu.be/GuYpWV9S65Y)
-
-############# GLOBAL PLANNER
-
-# [GP1]
-
