@@ -36,7 +36,7 @@ roslaunch rdl_turtlebot3_navigation motion_planning.launch gazebo_gui:=true
 rosrun rviz rviz --display-config `rospack find rdl_turtlebot3_navigation`/config/rdl_path_planning.rviz
 
 # [DWA5] test your local planner implementation
-roslaunch rdl_turtlebot3_navigation dwa_motion_planning.launch
+roslaunch rdl_turtlebot3_navigation dwa_local_planner.launch
 
 # wait but robot is not moving!!?
 # give a navigation goal in rviz to trigger global plan generation (2D Nav Goal), see: https://youtu.be/GuYpWV9S65Y
