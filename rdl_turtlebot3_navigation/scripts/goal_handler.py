@@ -16,7 +16,7 @@ class GoalHandler(object):
     def __init__(self):
         # subscriptions
         rospy.Subscriber('/move_base_simple/goal', PoseStamped, self.NavGoalCallBack, queue_size=1)
-        srv_name = '/move_base/make_plan'
+        srv_name = rospy.get_param('~path_planning_srv_name', '/move_base/make_plan') # '/robot_design_lab/make_plan' also possible
         rospy.loginfo('waiting for service : {}'.format(srv_name))
         rospy.wait_for_service(srv_name)
         rospy.loginfo('service available, proceed')
