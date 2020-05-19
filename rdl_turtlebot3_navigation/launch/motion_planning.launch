@@ -6,6 +6,7 @@
     <arg name="gazebo_gui" default="true" />
     <arg name="x_pos" default="0.0" />
     <arg name="y_pos" default="-0.5" />
+    <arg name="path_planning_srv_name" default="/move_base/make_plan" /> <!-- "/robot_design_lab/make_plan" also possible -->
 
     <!-- bringup a localised robot in simulation -->
     <include file="$(find rdl_turtlebot3_bringup_sim)/launch/robot.launch">
@@ -20,6 +21,8 @@
     </include>
 
     <!-- subscribe to /move_base_simple/goal (rviz way of giving goals) and call srv to make plan -->
-    <node pkg="rdl_turtlebot3_navigation" type="goal_handler.py" name="goal_handler" output="screen"/>
+    <node pkg="rdl_turtlebot3_navigation" type="goal_handler.py" name="goal_handler" output="screen">
+        <param name="path_planning_srv_name" value="$(arg path_planning_srv_name)" />
+    </node>
 
 </launch>
