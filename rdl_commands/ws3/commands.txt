@@ -13,7 +13,7 @@ roslaunch rdl_turtlebot3_navigation local_planner.launch gazebo_gui:=false
 roslaunch rdl_turtlebot3_navigation local_planner.launch gazebo_gui:=true
 
 # [DWA4] open rviz, debugging topic visualisation tool
-rosrun rviz rviz --display-config `rospack find rdl_turtlebot3_navigation`/config/rdl_move_base.rviz
+rosrun rviz rviz --display-config `rospack find rdl_turtlebot3_navigation`/config/rdl_path_planning.rviz
 
 # [DWA5] test your local planner implementation
 roslaunch rdl_turtlebot3_navigation dwa_local_planner.launch
