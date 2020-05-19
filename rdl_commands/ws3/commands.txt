@@ -19,6 +19,7 @@ rosrun rdl_turtlebot3_navigation path_planning.py
 rosrun rviz rviz --display-config `rospack find rdl_turtlebot3_navigation`/config/rdl_path_planning.rviz
 
 # give a navigation goal in rviz to trigger global plan generation (2D Nav Goal)
+# or run ./run_planning.sh to create a path calling your pathfindern
 
 ############# DWA LOCAL PLANNER
 
