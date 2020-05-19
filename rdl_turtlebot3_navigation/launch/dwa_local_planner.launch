@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<launch>
+
+    <arg name="loop_rate" default="1.0" />
+    <arg name="distance_between_wheels" default="0.16" /> <!-- CORRECT VALUE WAS INSERTED HERE -->
+    <arg name="wheel_diameter" default="0.066" />
+
+    <!-- dwa local planner, follow global plan locally -->
+    <node pkg="rdl_turtlebot3_navigation" type="dwa_local_planner.py" name="rdl_dwa_local_planner" output="screen">
+        <param name="loop_rate" value="$(arg loop_rate)"/>
+        <param name="distance_between_wheels" value="$(arg distance_between_wheels)"/>
+        <param name="wheel_diameter"  value="$(arg wheel_diameter)"/>
+    </node>
+
+</launch>

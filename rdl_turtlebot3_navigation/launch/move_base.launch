@@ -8,6 +8,7 @@
     <arg name="move_forward_only" default="true"/>
     <arg name="cmd_vel_topic" default="/cmd_vel" />
     <arg name="odom_topic" default="odom" />
+    <arg name="simple_goal_topic" default="move_base_simple/goal" />
 
     <!-- Map server -->
     <node pkg="map_server" name="map_server" type="map_server" args="$(find rdl_turtlebot3_navigation)/maps/$(arg world_name)/map.yaml"/>
@@ -25,6 +26,7 @@
         <rosparam file="$(find rdl_turtlebot3_navigation)/config/move_base/move_base_params.yaml" command="load" />
         <rosparam file="$(find rdl_turtlebot3_navigation)/config/move_base/dwa_local_planner_params_burger.yaml" command="load" />
         <remap from="cmd_vel" to="$(arg cmd_vel_topic)"/>
+        <remap from="move_base_simple/goal" to="$(arg simple_goal_topic)"/>
         <remap from="odom" to="$(arg odom_topic)"/>
         <param name="DWAPlannerROS/min_vel_x" value="0.0" if="$(arg move_forward_only)" />
     </node>
