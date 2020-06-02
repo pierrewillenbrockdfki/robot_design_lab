@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!-- NOTE: This is an example launch file, please do not modify ! -->
+
+  <!-- the topic of the laser scanner readings -->
+  <arg name="scan_topic" default="/scan" />
+
+  <!-- map will be published on this topic -->
+  <arg name="map_topic" default="/map" />
+
+  <!-- the yaml file that contains the mapping yaml parameters -->
+  <arg name="mapping_params_yaml_file" default="$(find rdl_turtlebot3_navigation)/config/mapping/mapping_params.yaml" />
+
+  <!-- mapping node -->
+  <node pkg="rdl_turtlebot3_navigation" type="mapping_node.py" name="mapping_node" output="screen" >
+    <!-- load mapping parameters -->
+    <rosparam file="$(arg mapping_params_yaml_file)" command="load" />    
+    <!-- remap topics -->
+    <remap from="~scan" to="$(arg scan_topic)"/>
+    <remap from="~map" to="$(arg map_topic)"/>
+  </node>
+
+</launch>

@@ -1,0 +1,15 @@
+# mapping parameters
+loop_rate: 5                                        # The frequency at which the map will be updated
+obstacle_thickness: 0.1                             # the size of the smallest obstacle in meters, default 0.1 m
+replace_laser_nan_with: 1000                        # nan laser readings (INF?, reflections?) will be replaced with this value
+sensor_pose_transform_tolerance: 0.1                # tf will wait for this amount of time until sensor pose pose is available
+global_reference_frame: odom                        # the global fixed reference frame
+prior_of_occupancy: 0.5                             # lo, 0.5 for unknown
+subscribe_to_existing_map: False                    # whether to make a new map from scratch or to update an existing one
+
+# map parameters
+map_resolution: 0.1                                 # the resolution of the map in meter per cell/pixel
+map_width: 80                                       # the size of the map in cells (width)
+map_height: 80                                      # the size of the map in cells (height)
+map_x_offset: -4.0                                  # the offset between map origin and world origin in x direction
+map_y_offset: -4.0                                  # the offset between map origin and world origin in y direction
