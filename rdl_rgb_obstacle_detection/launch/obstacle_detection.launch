@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<launch>
+
+    <!-- RGB based obstacle detection using opencv -->
+
+    <!-- arguments -->
+    <arg name="input_image_topic" default="/camera/image"/>
+    <arg name="input_image_compressed_topic" default="/camera/image_compressed"/>
+
+    <node pkg="rdl_rgb_obstacle_detection" name="image_processing"
+          type="obstacle_detection.py" output="screen">
+        <!-- green color obstacles -->
+        <param name="obs_h_hi" value="80" />
+        <param name="obs_h_lo" value="60" />
+        <param name="obs_s_hi" value="255" />
+        <param name="obs_s_lo" value="110" />
+        <param name="obs_v_hi" value="210" />
+        <param name="obs_v_lo" value="100" />
+
+        <!-- blue color "goal left" -->
+        <param name="goal_left_h_hi" value="130" />
+        <param name="goal_left_h_lo" value="100" />
+        <param name="goal_left_s_hi" value="245" />
+        <param name="goal_left_s_lo" value="125" />
+        <param name="goal_left_v_hi" value="255" />
+        <param name="goal_left_v_lo" value="60" />
+
+        <!-- red color "goal right" -->
+        <param name="goal_right_h_hi" value="10" />
+        <param name="goal_right_h_lo" value="0" />
+        <param name="goal_right_s_hi" value="255" />
+        <param name="goal_right_s_lo" value="170" />
+        <param name="goal_right_v_hi" value="215" />
+        <param name="goal_right_v_lo" value="80" />
+
+        <param name="binarization_threshold" value="25" />
+        <param name="debug" value="True" />
+
+        <remap from="input_obstacles_image" to="$(arg input_image_topic)" />
+        <remap from="input_obstacles_image_compressed" to="$(arg input_image_compressed_topic)" />
+    </node>
+
+</launch>

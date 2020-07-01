@@ -1,0 +1,14 @@
+# in general, is good practice to control in which terminal the roscore lives
+roscore
+
+# bringup the robot with an environment suitable for perception of colored obstacles smaller than the height of the laser
+roslaunch rdl_turtlebot3_bringup_sim robot.launch world_name:=simple_competition
+
+# run obstacle detection using RGB camera
+roslaunch rdl_rgb_obstacle_detection obstacle_detection.launch
+
+# robot teleoperation
+rosrun teleop_twist_keyboard teleop_twist_keyboard.py
+
+# run rviz with special configuration
+rosrun rviz rviz --display-config `rospack find rdl_rgb_obstacle_detection`/config/rviz_rgb_obs.rviz
