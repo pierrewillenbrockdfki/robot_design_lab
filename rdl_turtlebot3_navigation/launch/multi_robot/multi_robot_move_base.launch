@@ -4,17 +4,34 @@
     <!-- autonomous navigation move base configuration for turtlebot3 -->
 
     <!-- Arguments -->
+    <!-- to enable multiple robots -->
+    <arg name="robot_name" default="robot1"/> <!-- provide your robot name here (any name) -->
+    <!-- map server args -->
     <arg name="world_name" default="turtlebot3_world"/>
+    <!-- move base args -->
     <arg name="move_forward_only" default="true"/>
-    <arg name="cmd_vel_topic" default="/cmd_vel" />
+    <arg name="cmd_vel_topic" default="cmd_vel" />
     <arg name="odom_topic" default="odom" />
     <arg name="simple_goal_topic" default="move_base_simple/goal" />
+    <!-- amcl args -->
+    <arg name="scan_topic" default="scan" />
+    <arg name="initial_pose_x" default="0.0" />
+    <arg name="initial_pose_y" default="0.0" />
+    <arg name="initial_pose_a" default="0.0" /> <!-- yaw in radians -->
 
     <!-- Map server -->
     <node pkg="map_server" name="map_server" type="map_server" args="$(find rdl_turtlebot3_navigation)/maps/$(arg world_name)/map.yaml"/>
 
     <!-- AMCL -->
-    <include file="$(find turtlebot3_navigation)/launch/amcl.launch"/>
+    <node pkg="amcl" type="amcl" name="amcl">
+        <remap from="scan" to="$(arg scan_topic)"/>
+        <param name="odom_frame_id" value="$(arg robot_name)/odom"/>
+        <param name="base_frame_id" value="$(arg robot_name)/base_footprint"/>
+        <param name="initial_pose_x" value="$(arg initial_pose_x)"/>
+        <param name="initial_pose_y" value="$(arg initial_pose_y)"/>
+        <param name="initial_pose_a" value="$(arg initial_pose_a)"/>
+        <rosparam file="$(find rdl_turtlebot3_navigation)/config/move_base/amcl.yaml" command="load"/>
+    </node>
 
     <!-- move_base -->
     <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
@@ -29,9 +46,9 @@
         <remap from="move_base_simple/goal" to="$(arg simple_goal_topic)"/>
         <remap from="odom" to="$(arg odom_topic)"/>
         <param name="DWAPlannerROS/min_vel_x" value="0.0" if="$(arg move_forward_only)" />
-        <param name="global_costmap/robot_base_frame" value="base_footprint" />
-        <param name="local_costmap/robot_base_frame" value="base_footprint" />
-        <param name="local_costmap/obstacle_layer/scan/sensor_frame" value="base_scan" />
+        <param name="global_costmap/robot_base_frame" value="$(arg robot_name)/base_footprint" />
+        <param name="local_costmap/robot_base_frame" value="$(arg robot_name)/base_footprint" />
+        <param name="local_costmap/obstacle_layer/scan/sensor_frame" value="$(arg robot_name)/base_scan" />
         <param name="local_costmap/obstacle_layer/scan/topic" value="scan" />
     </node>
 

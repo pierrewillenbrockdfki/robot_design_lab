@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<launch>
+
+    <!-- template to bringup multiple turtlebot3 burger with camera in simulation with gazebo -->
+
+    <!-- Arguments -->
+    <arg name="model" default="simplified_burger"/> <!-- options: burger, simplified_burger, joint_ctrl_burger-->
+    <!-- initial robot pose -->
+    <arg name="x_pos" default="0.0"/>
+    <arg name="y_pos" default="0.0"/>
+    <arg name="z_pos" default="0.043"/>
+    <arg name="roll" default="0.0"/>
+    <!-- to enable multiple robots -->
+    <arg name="robot_name" default="robot1"/> <!-- provide your robot name here (any name) -->
+
+    <group ns="$(arg robot_name)">
+        <!-- upload turtlebot3 URDF model to param server -->
+        <param name="robot_description"
+            command="$(find xacro)/xacro $(find rdl_turtlebot3_description)/urdf/turtlebot3_$(arg model).urdf.xacro"/>
+
+        <param name="tf_prefix" value="$(arg robot_name)"/>
+        <!-- spawn turtlebot3 robot -->
+        <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf"
+            args="-urdf -model $(arg robot_name) -x $(arg x_pos) -y $(arg y_pos) -z $(arg z_pos) -R $(arg roll) -param robot_description"/>
+
+        <!-- robot state publisher, publishes tf data based on joint states topic -->
+        <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" ns="turtlebot3_burger">
+            <param name="publish_frequency" type="double" value="50.0"/>
+        </node>
+
+        <!-- navigation stack -->
+        <include file="$(find rdl_turtlebot3_navigation)/launch/multi_robot/multi_robot_move_base.launch">
+            <arg name="robot_name" value="$(arg robot_name)"/>
+            <arg name="initial_pose_x" value="$(arg x_pos)" />
+            <arg name="initial_pose_y" value="$(arg y_pos)" />
+            <arg name="initial_pose_a" value="$(arg z_pos)" />
+        </include>
+    </group>
+
+</launch>
