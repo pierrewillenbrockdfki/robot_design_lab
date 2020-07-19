@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package>
+    <name>rdl_navigation_layers</name>
+    <version>0.0.0</version>
+    <description>
+        - Listen to topic "x" that contains pose information
+        - Set a lethal cost on its x, y coordinate into a custom costmap layer
+    </description>
+
+    <maintainer email="oscar.lima@dfki.de">Oscar Lima</maintainer>
+    <license>MIT</license>
+
+    <buildtool_depend>catkin</buildtool_depend>
+    <build_depend>roscpp</build_depend>
+    <build_depend>costmap_2d</build_depend>
+    <build_depend>dynamic_reconfigure</build_depend>
+    <run_depend>costmap_2d</run_depend>
+    <run_depend>dynamic_reconfigure</run_depend>
+
+    <export>
+        <costmap_2d plugin="${prefix}/costmap_rdl_plugin.xml" />
+    </export>
+</package>

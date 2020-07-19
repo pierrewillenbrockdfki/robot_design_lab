@@ -7,6 +7,13 @@ global_costmap:
   plugins:
     - name: static_layer
       type: 'costmap_2d::StaticLayer'
+    -
+      name: custom_rdl_layer
+      type: 'rdl_navigation_layers::RGBObstaclesLayer'
     - 
       name: inflation_layer
       type: 'costmap_2d::InflationLayer'
+
+  custom_rdl_layer:
+    draw_circle_around: true
+    radius: 0.1

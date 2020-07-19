@@ -1,0 +1,51 @@
+############# INTEGRATION (ws7 = competition)
+
+# before using this commands, make sure you generate a map of the competition environment
+# using ws4 commands
+
+--- competition
+
+# [INT1]
+roscore
+
+# [INT2,3], use either of these 2 commands depending on your computational resources
+roslaunch rdl_turtlebot3_navigation competition.launch gazebo_gui:=true
+roslaunch rdl_turtlebot3_navigation competition.launch gazebo_gui:=false
+
+# [INT4] open rviz to visualise the plan
+rosrun rviz rviz --display-config `rospack find rdl_turtlebot3_navigation`/config/rdl_path_planning.rviz
+
+# NOTE: giving rviz navigation goals is not allowed for this worksheet, other than for debugging purposes
+#       your robot should identify and actively drive in between the detected goals (red and blue cylinders)
+
+--- test only the obstacle layer
+
+# [NLAY1]
+roscore
+
+# [NLAY2] - bringup turtlebot 3
+roslaunch rdl_turtlebot3_bringup_sim robot.launch gazebo_gui:=false
+
+# [NLAY3] - ros navigation stack - move base
+roslaunch rdl_turtlebot3_navigation move_base.launch
+
+# [NLAY4] to visualise the added obstacle in rviz - make sure global costmap is enabled
+rosrun rviz rviz --display-config `rospack find rdl_turtlebot3_navigation`/config/rdl_path_planning.rviz
+
+# [NLAY5] - publish a pose array msg
+rostopic pub /move_base/global_costmap/custom_rdl_layer/rdl_rgb_obstacles geometry_msgs/PoseArray "header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs: 0
+  frame_id: 'map'
+poses:
+- position:
+    x: 1.0
+    y: 0.0
+    z: 0.0
+  orientation:
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0"
