@@ -14,6 +14,7 @@
     <arg name="odom_topic" default="odom" />
     <arg name="simple_goal_topic" default="move_base_simple/goal" />
     <!-- amcl args -->
+    <arg name="tf_broadcast" default="true" />
     <arg name="scan_topic" default="scan" />
     <arg name="initial_pose_x" default="0.0" />
     <arg name="initial_pose_y" default="0.0" />
@@ -30,6 +31,7 @@
         <param name="initial_pose_x" value="$(arg initial_pose_x)"/>
         <param name="initial_pose_y" value="$(arg initial_pose_y)"/>
         <param name="initial_pose_a" value="$(arg initial_pose_a)"/>
+        <param name="tf_broadcast" value="$(arg tf_broadcast)"/>
         <rosparam file="$(find rdl_turtlebot3_navigation)/config/move_base/amcl.yaml" command="load"/>
     </node>
 
