@@ -1,0 +1,16 @@
+# in general, is good practice to control in which terminal the roscore lives
+roscore
+
+# bringup the simulated robot
+roslaunch rdl_turtlebot3_bringup_sim robot.launch world_name:=simple_competition
+
+# pose likelyhood server
+
+# localization
+roslaunch rdl_turtlebot3_navigation 
+
+# robot teleoperation
+rosrun teleop_twist_keyboard teleop_twist_keyboard.py
+
+# run rviz with special configuration
+rosrun rviz rviz --display-config `rospack find rdl_turtlebot3_navigation`/config/pose_estimation.rviz
